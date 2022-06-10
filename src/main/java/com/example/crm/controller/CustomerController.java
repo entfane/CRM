@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/customer")
 public class CustomerController {
 
     //need to inject the customer dao
     @Autowired
     private CustomerDAO customerDAO;
 
-    @RequestMapping("/list")
+    @RequestMapping("/")
     public String listCustomers(Model theModel) {
         //get customers from the dao
         List<Customer> customers = customerDAO.getCustomers();
