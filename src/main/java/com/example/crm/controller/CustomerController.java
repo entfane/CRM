@@ -5,7 +5,7 @@ import com.example.crm.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class CustomerController {
     @Autowired
     private CustomerDAO customerDAO;
 
-    @RequestMapping("/")
+    @GetMapping("/")
     public String listCustomers(Model theModel) {
         //get customers from the dao
         List<Customer> customers = customerDAO.getCustomers();
