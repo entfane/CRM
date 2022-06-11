@@ -1,6 +1,5 @@
 package com.example.crm.dao;
 
-import com.example.crm.CrmApplication;
 import com.example.crm.entity.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
