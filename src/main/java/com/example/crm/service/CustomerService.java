@@ -1,10 +1,11 @@
-package com.example.crm.dao;
+package com.example.crm.service;
 
 import com.example.crm.entity.Customer;
 
 import java.util.List;
 
-public interface CustomerDAO {
+public interface CustomerService {
 
     List<Customer> getCustomers();
+
 }
