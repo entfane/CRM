@@ -23,6 +23,10 @@ public class Customer {
     public Customer() {
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

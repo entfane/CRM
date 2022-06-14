@@ -23,6 +23,10 @@
 
       <form action = "saveCustomer" method = "POST" th:object = "${customer}">
 
+          <!-- need to associate this data with customer id -->
+
+          <input type = "hidden" th:field = "*{id}"/>
+
         <table>
 
           <tbody>
