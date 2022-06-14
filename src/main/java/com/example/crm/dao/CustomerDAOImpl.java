@@ -6,9 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -65,5 +64,22 @@ public class CustomerDAOImpl implements CustomerDAO {
         session.delete(customer);
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Override
+    public List<Customer> searchCustomers(String searchName) {
+        Session session = sessionFactory.getCurrentSession();
+        session.beginTransaction();
+        Query query = null;
+        if ( (searchName != null) && (searchName.trim().length() > 0) ) {       // check whether searchName is empty
+            query = session.createQuery("from Customer where lower(firstName) like :theName or lower(lastName) like :theName", Customer.class);
+            query.setParameter("theName", "%" + searchName.toLowerCase() + "%");
+        } else {    // searchName is empty
+            query = session.createQuery("from Customer", Customer.class);
+        }
+
+        List<Customer> customers = query.getResultList();
+        session.getTransaction().commit();
+        return customers;
     }
 }
