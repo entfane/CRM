@@ -1,6 +1,7 @@
 package com.example.crm.dao;
 
 import com.example.crm.entity.Customer;
+import com.example.crm.utils.SortUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -17,13 +18,25 @@ public class CustomerDAOImpl implements CustomerDAO {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<Customer> getCustomers() {
+    public List<Customer> getCustomers(SortUtils sort) {
         //get current hibernate session
         Session session = sessionFactory.getCurrentSession();
 
         session.beginTransaction();
-        //create a query, sort by  last name
-        Query<Customer> theQuery = session.createQuery("from Customer order by lastName", Customer.class);
+
+        Query<Customer> theQuery;
+        switch (sort) {
+
+            case FIRST_NAME:
+                theQuery = session.createQuery("from Customer order by firstName", Customer.class);
+                break;
+            case EMAIL:
+                theQuery = session.createQuery("from Customer order by email", Customer.class);
+                break;
+            default:    //by default lastName
+                theQuery = session.createQuery("from Customer order by lastName", Customer.class);
+
+        }
         // execute query and get result list
         List<Customer> customers = theQuery.getResultList();
 
