@@ -1,6 +1,7 @@
 package com.example.crm.controller;
 
 import com.example.crm.entity.Customer;
+import com.example.crm.utils.SortUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,12 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/")
-    public String listCustomers(Model theModel) {
-        //get customers from the com.example.crm.service
-        List<Customer> customers = customerService.getCustomers();
+    public String listCustomers(@RequestParam(required = false) Integer sortCode, Model theModel) {
+
+        SortUtils sort = sortCodeToSortUtils(sortCode);
+
+        List<Customer> customers = customerService.getCustomers(sort);
+
         //add the customers to the model
         theModel.addAttribute("customers", customers);
         return "listCustomers";
@@ -68,6 +72,23 @@ public class CustomerController {
         model.addAttribute("customers", customers);
 
         return "listCustomers";
+    }
+
+    private SortUtils sortCodeToSortUtils(Integer sortCode) {       // 1 - first name, 2 - last name, 3 - email
+
+        if (sortCode == null) {
+            return SortUtils.LAST_NAME;
+        }
+
+        switch (sortCode) {
+
+            case 1:
+                return SortUtils.FIRST_NAME;
+            case 3:
+                return SortUtils.EMAIL;
+            default:
+                return SortUtils.LAST_NAME;
+        }
     }
 
 }
