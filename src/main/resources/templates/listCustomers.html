@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://www.w3.org/1999/XSL/Transform">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>List Customers</title>
@@ -26,7 +26,7 @@
 
             <!-- put new button: Add Customer -->
 
-            <input type = "button" value = "Add Customer"
+            <input  sec:authorize = "hasAnyRole('MANAGER', 'ADMIN')" type = "button" value = "Add Customer"
                    onclick="window.location.href = 'showFormForAdd'; return false;" class = "add-button"/>
             
             <form action = "search" method = "GET">
@@ -57,9 +57,9 @@
 
                     <td>
 
-                        <a th:href = "@{/showFormForUpdate(customerId = ${customer.id})}">Update</a>
+                        <a sec:authorize = "hasAnyRole('MANAGER', 'ADMIN')" th:href = "@{/showFormForUpdate(customerId = ${customer.id})}">Update</a>
                         |
-                        <a th:href = "@{/delete(customerId = ${customer.id})}" onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
+                        <a sec:authorize = "hasRole('ADMIN')" th:href = "@{/delete(customerId = ${customer.id})}" onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false">Delete</a>
 
                     </td>
 
@@ -72,6 +72,12 @@
         </div>
     
     </div>
+
+    <form th:action = "@{/logout}" method = "POST">
+
+        <input type = "submit" value = "logout" />
+
+    </form>
 
 
 </body>

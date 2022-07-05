@@ -29,6 +29,8 @@ public class CustomerController {
         return "listCustomers";
     }
 
+    /*
+
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model) {
 
@@ -73,6 +75,12 @@ public class CustomerController {
 
         return "listCustomers";
     }
+
+    @PostMapping("/accessDenied")
+    public String accessDenied() {
+        return "accessDenied";
+    }
+     */
 
     private SortUtils sortCodeToSortUtils(Integer sortCode) {       // 1 - first name, 2 - last name, 3 - email
 
