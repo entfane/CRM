@@ -22,6 +22,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public List<Customer> getCustomers() {
+        return customerDAO.getCustomers(SortUtils.LAST_NAME);
+    }
+
+    @Override
     @Transactional
     public void saveOrUpdateCustomer(Customer customer) {
         customerDAO.saveOrUpdateCustomer(customer);

@@ -9,6 +9,8 @@ public interface CustomerService {
 
     List<Customer> getCustomers(SortUtils sort);
 
+    List<Customer> getCustomers();
+
     void saveOrUpdateCustomer(Customer customer);
 
     Customer getCustomer(int id);
