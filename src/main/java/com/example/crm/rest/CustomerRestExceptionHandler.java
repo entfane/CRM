@@ -19,7 +19,6 @@ public class CustomerRestExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<CustomerErrorResponse> handleException(Exception exc) {
-        System.out.println("lol");
 
         CustomerErrorResponse customerErrorResponse = new CustomerErrorResponse(HttpStatus.BAD_REQUEST.value(), exc.getMessage(), System.currentTimeMillis());
 
