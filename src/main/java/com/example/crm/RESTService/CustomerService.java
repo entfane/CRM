@@ -1,4 +1,4 @@
-package com.example.crm.service;
+package com.example.crm.RESTService;
 
 import com.example.crm.entity.Customer;
 import com.example.crm.utils.SortUtils;
