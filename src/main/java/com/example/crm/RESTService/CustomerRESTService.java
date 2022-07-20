@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class CustomerRESTService implements CustomerService {
+public class CustomerRESTService implements RestCustomerService {
 
     private RestTemplate restTemplate;
     private final String crmRestUrl = "http://localhost:8080/api/customers";
@@ -23,18 +23,12 @@ public class CustomerRESTService implements CustomerService {
     }
 
     @Override
-    public List<Customer> getCustomers(SortUtils sort) {
+    public List<Customer> getCustomers(int sort) {
         ResponseEntity<List<Customer>> responseEntity = restTemplate.exchange(crmRestUrl + "/sorted/" + sort, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
         List<Customer> customers = responseEntity.getBody();
         return customers;
     }
 
-    @Override
-    public List<Customer> getCustomers() {
-        ResponseEntity<List<Customer>> responseEntity = restTemplate.exchange(crmRestUrl, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-        List<Customer> customers = responseEntity.getBody();
-        return customers;
-    }
 
     @Override
     public void saveOrUpdateCustomer(Customer customer) {

@@ -1,12 +1,12 @@
 package com.example.crm.controller;
 
+import com.example.crm.RESTService.RestCustomerService;
 import com.example.crm.entity.Customer;
 import com.example.crm.utils.SortUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.example.crm.RESTService.CustomerService;
 
 import java.util.List;
 
@@ -15,14 +15,16 @@ public class CustomerController {
 
     //need to inject our customer com.example.crm.service
     @Autowired
-    private CustomerService customerService;
+    private RestCustomerService customerService;
 
     @GetMapping("/")
     public String listCustomers(@RequestParam(required = false) Integer sortCode, Model theModel) {
 
-        SortUtils sort = sortCodeToSortUtils(sortCode);
+        if (sortCode == null) {
+            sortCode = 2;
+        }
 
-        List<Customer> customers = customerService.getCustomers(sort);
+        List<Customer> customers = customerService.getCustomers(sortCode);
 
         //add the customers to the model
         theModel.addAttribute("customers", customers);

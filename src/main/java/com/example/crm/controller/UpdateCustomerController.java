@@ -1,7 +1,7 @@
 package com.example.crm.controller;
 
 import com.example.crm.entity.Customer;
-import com.example.crm.RESTService.CustomerService;
+import com.example.crm.RESTService.RestCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UpdateCustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private RestCustomerService customerService;
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("customerId") int id, Model model) {

@@ -1,7 +1,7 @@
 package com.example.crm.controller;
 
 import com.example.crm.entity.Customer;
-import com.example.crm.RESTService.CustomerService;
+import com.example.crm.RESTService.RestCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import java.util.List;
 public class SearchCustomersController {
 
     @Autowired
-    private CustomerService customerService;
+    private RestCustomerService customerService;
 
     @GetMapping("/search")
     public String searchCustomers(@RequestParam("searchName") String searchName, Model model) {
